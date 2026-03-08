@@ -2,11 +2,10 @@ import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/Core/widgets/custom_button.dart';
 import 'package:ahmed_task/Core/widgets/back_header_button.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/custom_pin_code_text_field.dart';
-import 'package:go_router/go_router.dart';
-
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/resend_section.dart';
 import 'package:ahmed_task/Core/widgets/logo_with_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class VerificationView extends StatelessWidget {
   const VerificationView({super.key});
@@ -65,7 +64,7 @@ class VerificationView extends StatelessWidget {
                               shadowColor: const Color(0x402B8CEE),
                             ),
                             SizedBox(height: 16),
-                            // review again
+
                             ResendSection(
                               remainingSeconds: 30,
                               onResend: () {},

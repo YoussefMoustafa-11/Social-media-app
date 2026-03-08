@@ -10,6 +10,7 @@ import 'package:ahmed_task/feature/profile/presentation/view/profile_view.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/create_new_password/create_new_password.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_password/forgot_password_view.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/verification_view.dart';
+import 'package:ahmed_task/feature/search/presentation/view/search_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
 import 'package:ahmed_task/feature/story/presentation/view/add_story/add_story_view.dart';
@@ -43,7 +44,7 @@ class RouterGenerationConfig {
       GoRoute(
         path: AppRoutes.exploreView,
         name: AppRoutes.exploreView,
-        builder: (context, state) => const ExploreView(),
+        builder: (context, state) => const SearchView(),
       ),
       GoRoute(
         path: AppRoutes.commentsView,

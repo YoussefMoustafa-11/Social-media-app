@@ -16,7 +16,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  // Sample data - في التطبيق الحقيقي، البيانات تأتي من API
+  //  Mock data for stories and posts
   final List<Map<String, dynamic>> stories = [
     {
       'imageUrl': '',

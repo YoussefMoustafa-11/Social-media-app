@@ -18,8 +18,14 @@ class PhoneInputGroup extends StatelessWidget {
     const countryCodes = [
       ('+20', '🇪🇬'),
       ('+44', '🇬🇧'),
+      ('+1', '🇺🇸'),
       ('+91', '🇮🇳'),
       ('+61', '🇦🇺'),
+      ('+49', '🇩🇪'),
+      ('+33', '🇫🇷'),
+      ('+81', '🇯🇵'),
+      ('+86', '🇨🇳'),
+      ('+55', '🇧🇷'),
     ];
 
     return Column(
@@ -48,14 +54,12 @@ class PhoneInputGroup extends StatelessWidget {
                   }
                 },
                 //-------->NOTE: Generate dropdown items from countryCodes list
-                items: countryCodes
-                    .map(
-                      (country) => DropdownMenuItem<String>(
-                        value: country.$1,
-                        child: Text('${country.$2} ${country.$1}'),
-                      ),
-                    )
-                    .toList(),
+                items: countryCodes.map((country) {
+                  return DropdownMenuItem<String>(
+                    value: country.$1,
+                    child: Text('${country.$2} ${country.$1}'),
+                  );
+                }).toList(),
 
                 decoration: InputDecoration(
                   fillColor: Colors.white,

@@ -19,20 +19,7 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: AppColors.white,
       title: const Text('Home Feed', style: AppTextStyle.heading2),
       centerTitle: true,
-      leading: Container(
-        margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.primary.withValues(alpha: 0.1),
-        ),
-        child: IconButton(
-          icon: const Icon(Icons.camera_alt_outlined),
-          color: AppColors.primary,
-          onPressed: () {
-            // TODO: Open camera
-          },
-        ),
-      ),
+
       actions: [
         IconButton(
           icon: const Icon(Icons.search),
