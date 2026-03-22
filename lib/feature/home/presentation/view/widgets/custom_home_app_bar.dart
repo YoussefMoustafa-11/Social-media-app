@@ -1,6 +1,8 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomHomeAppBar({super.key});
@@ -25,7 +27,7 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.search),
           color: AppColors.darkText,
           onPressed: () {
-            // TODO: Open search
+            GoRouter.of(context).pushNamed(AppRoutes.searchView);
           },
         ),
       ],

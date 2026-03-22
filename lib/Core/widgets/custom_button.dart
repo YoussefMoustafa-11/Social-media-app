@@ -50,7 +50,7 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height,
-      child: ElevatedButton(
+      child: ElevatedButton( 
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
@@ -63,7 +63,7 @@ class CustomButton extends StatelessWidget {
         ),
         child: icon != null
             ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(buttonText, style: textStyle ?? AppTextStyle.buttonText),
                   SizedBox(width: iconSpacing),

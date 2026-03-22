@@ -1,4 +1,6 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../Core/themes/app_color.dart';
 import 'profile_image.dart';
 import 'package:ahmed_task/Core/widgets/stats_grid.dart';
@@ -49,7 +51,10 @@ class ProfileInfoSection extends StatelessWidget {
           const SizedBox(height: 24),
           const StatsGrid(),
           const SizedBox(height: 24),
-          const ActionButtons(),
+          ActionButtons(
+            onEditProfile: () =>
+                GoRouter.of(context).pushNamed(AppRoutes.editProfileView),
+          ),
         ],
       ),
     );

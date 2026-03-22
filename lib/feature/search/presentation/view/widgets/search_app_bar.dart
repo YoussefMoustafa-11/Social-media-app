@@ -42,17 +42,13 @@ class _SearchAppBarState extends State<SearchAppBar> {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
-          bottom: BorderSide(
-            color: Colors.grey.shade200,
-            width: 1,
-          ),
+          bottom: BorderSide(color: Colors.grey.shade200, width: 1),
         ),
       ),
       child: Row(
         children: [
           Expanded(
             child: Container(
-              height: 44,
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(22),
@@ -60,14 +56,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
               child: CustomTextField(
                 controller: widget.searchController,
                 hintText: 'Search posts, people, tags...',
-                hintStyle: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontSize: 15,
-                ),
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: AppColors.darkText,
-                ),
+                hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 15),
+                style: const TextStyle(fontSize: 15, color: AppColors.darkText),
                 prefixIcon: Icons.search,
                 suffixIcon: widget.searchController.text.isNotEmpty
                     ? IconButton(
@@ -86,7 +76,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                 borderRadius: 22,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 12,
+                  vertical: 8,
                 ),
               ),
             ),

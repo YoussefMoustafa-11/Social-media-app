@@ -14,4 +14,5 @@ class AppRoutes {
   static const String storyView = "/storyView";
   static const String addStory = "/addStory";
   static const String notificationsView = "/notificationsView";
+  static const String searchView = "/searchView";
 }

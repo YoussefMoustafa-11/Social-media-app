@@ -1,6 +1,7 @@
 import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_text_style.dart';
+import 'package:ahmed_task/Core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-
 
 class ActionButtons extends StatelessWidget {
   final VoidCallback? onEditProfile;
@@ -13,74 +14,37 @@ class ActionButtons extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: _ActionButton(
-            label: 'Edit Profile',
+          child: CustomButton(
+            buttonText: 'Edit Profile',
+            height: 44,
             backgroundColor: AppColors.primary,
-            textColor: Colors.white,
-            onPressed: onEditProfile ?? () {},
+            textStyle: AppTextStyle.buttonText.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            borderRadius: 8,
+            onPressed: onEditProfile,
           ),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _ActionButton(
-            label: 'Share Profile',
+          child: CustomButton(
+            buttonText: 'Share Profile',
+            height: 44,
+
             backgroundColor: AppColors.borderColor,
-            textColor: AppColors.darkText,
-            onPressed: onShareProfile ?? () {},
+            textStyle: AppTextStyle.buttonText.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: AppColors.darkText,
+            ),
+            borderRadius: 12,
+            onPressed: onShareProfile,
           ),
         ),
       ],
     );
   }
 }
-
-class _ActionButton extends StatefulWidget {
-  final String label;
-  final Color backgroundColor;
-  final Color textColor;
-  final VoidCallback onPressed;
-
-  const _ActionButton({
-    required this.label,
-    required this.backgroundColor,
-    required this.textColor,
-    required this.onPressed,
-  });
-
-  @override
-  State<_ActionButton> createState() => _ActionButtonState();
-}
-
-class _ActionButtonState extends State<_ActionButton> {
-  bool _isPressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) {
-        setState(() => _isPressed = false);
-        widget.onPressed();
-      },
-      onTapCancel: () => setState(() => _isPressed = false),
-      child: Container(
-        height: 44,
-        decoration: BoxDecoration(
-          color: _isPressed
-              ? widget.backgroundColor.withValues(alpha: 0.8)
-              : widget.backgroundColor,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          widget.label,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: widget.textColor,
-          ),
-        ),
-      ),
-    );
-  }
-}
+ 

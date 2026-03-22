@@ -44,6 +44,11 @@ class RouterGenerationConfig {
       GoRoute(
         path: AppRoutes.exploreView,
         name: AppRoutes.exploreView,
+        builder: (context, state) => const ExploreView(),
+      ),
+      GoRoute(
+        path: AppRoutes.searchView,
+        name: AppRoutes.searchView,
         builder: (context, state) => const SearchView(),
       ),
       GoRoute(

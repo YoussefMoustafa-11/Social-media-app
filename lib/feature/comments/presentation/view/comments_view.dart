@@ -55,7 +55,7 @@ class CommentsView extends StatefulWidget {
   /// Call this to open the comments bottom sheet from anywhere.
   static void show(
     BuildContext context, {
-    required String postTitle,
+
     required int commentsCount,
   }) {
     showCommentsBottomSheet(

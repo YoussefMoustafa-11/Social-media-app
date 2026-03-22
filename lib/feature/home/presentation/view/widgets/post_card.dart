@@ -125,7 +125,7 @@ class _PostCardState extends State<PostCard> {
                   onTap: () {
                     CommentsView.show(
                       context,
-                      postTitle: widget.content,
+
                       commentsCount: widget.commentsCount,
                     );
                   },

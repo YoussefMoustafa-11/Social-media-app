@@ -14,19 +14,29 @@ class StoriesSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: SizedBox(
         height: 110,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          itemCount: stories.length,
-          itemBuilder: (context, index) {
-            final story = stories[index];
-            return StoryItem(
-              imageUrl: story['imageUrl'],
-              username: story['username'],
-              isAddStory: story['isAddStory'],
-              hasStory: story['hasStory'],
-            );
-          },
+        child: Row(
+          children: [
+            StoryItem(
+              imageUrl: '',
+              username: 'Your Story',
+              isAddStory: true,
+              hasStory: false,
+            ),
+            ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              itemCount: stories.length,
+              itemBuilder: (context, index) {
+                final story = stories[index];
+                return StoryItem(
+                  imageUrl: story['imageUrl'],
+                  username: story['username'],
+                  isAddStory: story['isAddStory'],
+                  hasStory: story['hasStory'],
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
