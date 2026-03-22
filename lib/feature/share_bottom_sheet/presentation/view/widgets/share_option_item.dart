@@ -1,3 +1,6 @@
+import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_spacing.dart';
+import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class ShareOptionItem extends StatelessWidget {
@@ -29,22 +32,22 @@ class ShareOptionItem extends StatelessWidget {
               width: 56,
               height: 56,
               decoration: BoxDecoration(
-                color: backgroundColor ?? const Color(0xFFF1F5F9),
+                color: backgroundColor ?? AppColors.surfaceMuted,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Icon(
                 icon,
-                color: iconColor ?? const Color(0xFF334155),
+                color: iconColor ?? AppColors.labelColor,
                 size: 24,
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: AppSpacing.xs),
             Text(
               label,
-              style: TextStyle(
+              style: AppTextStyle.labelSmall.copyWith(
                 fontSize: 11,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
+                color: AppColors.labelColor,
               ),
               textAlign: TextAlign.center,
               maxLines: 1,

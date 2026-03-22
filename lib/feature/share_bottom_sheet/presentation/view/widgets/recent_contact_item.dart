@@ -1,3 +1,6 @@
+import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_spacing.dart';
+import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/Core/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -41,30 +44,30 @@ class RecentContactItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     color:
                         iconBackgroundColor ??
-                        const Color(0xFF2B8CEE).withValues(alpha: 0.1),
+                        AppColors.primary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                     border: Border.all(
                       color:
                           iconBorderColor ??
-                          const Color(0xFF2B8CEE).withValues(alpha: 0.2),
+                          AppColors.primary.withValues(alpha: 0.2),
                       width: 2,
                     ),
                   ),
                   child: Icon(
                     icon ?? Icons.add,
-                    color: iconColor ?? const Color(0xFF2B8CEE),
+                    color: iconColor ?? AppColors.primary,
                     size: 30,
                   ),
                 ),
-              const SizedBox(height: 6),
+              const SizedBox(height: AppSpacing.xs),
               Text(
                 name,
-                style: TextStyle(
+                style: AppTextStyle.labelMedium.copyWith(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: imageUrl != null
-                      ? const Color(0xFF1E293B)
-                      : const Color(0xFF64748B),
+                      ? AppColors.darkText
+                      : AppColors.labelColor,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

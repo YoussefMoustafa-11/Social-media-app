@@ -25,12 +25,26 @@ class AppTextStyle {
     height: 1.5,
   );
 
+  static const TextStyle bodySmall = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: AppColors.greyText,
+    height: 1.4,
+  );
+
   // Label Styles
   static const TextStyle labelMedium = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     color: AppColors.labelColor,
     height: 1.4,
+  );
+
+  static const TextStyle labelSmall = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+    color: AppColors.labelColor,
+    height: 1.3,
   );
 
   // Button Styles
@@ -63,6 +77,4 @@ class AppTextStyle {
     color: AppColors.placeholderColor,
     height: 1.5,
   );
-
-  static Null get headingLarge => null;
 }

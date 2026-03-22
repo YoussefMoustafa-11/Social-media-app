@@ -1,3 +1,5 @@
+import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_spacing.dart';
 import 'package:flutter/material.dart';
 
 class StoryInteractionButtons extends StatelessWidget {
@@ -21,19 +23,19 @@ class StoryInteractionButtons extends StatelessWidget {
           onPressed: onLikePressed,
           icon: Icon(
             isLiked ? Icons.favorite : Icons.favorite_outline,
-            color: isLiked ? Colors.red : Colors.white,
+            color: isLiked ? AppColors.danger : AppColors.white,
             size: 28,
           ),
           constraints: const BoxConstraints(),
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(AppSpacing.xs),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: AppSpacing.md),
         // Send Button
         IconButton(
           onPressed: onSendPressed,
-          icon: const Icon(Icons.send, color: Colors.white, size: 28),
+          icon: const Icon(Icons.send, color: AppColors.white, size: 28),
           constraints: const BoxConstraints(),
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(AppSpacing.xs),
         ),
       ],
     );

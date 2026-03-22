@@ -1,4 +1,5 @@
 import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/Core/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -35,17 +36,17 @@ class SuggestedUserItem extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(
+                    style: AppTextStyle.labelMedium.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF1E293B),
+                      color: AppColors.darkText,
                     ),
                   ),
                   Text(
                     username,
-                    style: const TextStyle(
+                    style: AppTextStyle.labelSmall.copyWith(
                       fontSize: 12,
-                      color: Color(0xFF64748B),
+                      color: AppColors.labelColor,
                     ),
                   ),
                 ],
@@ -55,7 +56,7 @@ class SuggestedUserItem extends StatelessWidget {
               onPressed: onSend,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
+                foregroundColor: AppColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),
@@ -67,10 +68,7 @@ class SuggestedUserItem extends StatelessWidget {
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 elevation: 0,
               ),
-              child: const Text(
-                'Send',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
-              ),
+              child: const Text('Send', style: AppTextStyle.labelSmall),
             ),
           ],
         ),

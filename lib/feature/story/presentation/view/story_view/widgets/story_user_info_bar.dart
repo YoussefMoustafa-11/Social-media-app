@@ -1,4 +1,5 @@
 import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_spacing.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,10 @@ class StoryUserInfoBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -42,7 +46,7 @@ class StoryUserInfoBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: AppSpacing.sm),
                 // Username and Timestamp
                 Expanded(
                   child: Column(
@@ -52,7 +56,7 @@ class StoryUserInfoBar extends StatelessWidget {
                       Text(
                         username,
                         style: AppTextStyle.labelMedium.copyWith(
-                          color: Colors.white,
+                          color: AppColors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -62,7 +66,7 @@ class StoryUserInfoBar extends StatelessWidget {
                       Text(
                         timestamp,
                         style: AppTextStyle.bodyMedium.copyWith(
-                          color: Colors.white70,
+                          color: AppColors.overlayLight(0.7),
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
@@ -81,16 +85,16 @@ class StoryUserInfoBar extends StatelessWidget {
                 onPressed: onMorePressed,
                 icon: const Icon(
                   Icons.more_horiz,
-                  color: Colors.white,
+                  color: AppColors.white,
                   size: 24,
                 ),
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(AppSpacing.xs),
                 constraints: const BoxConstraints(),
               ),
               IconButton(
                 onPressed: onClosePressed,
-                icon: const Icon(Icons.close, color: Colors.white, size: 24),
-                padding: const EdgeInsets.all(8),
+                icon: const Icon(Icons.close, color: AppColors.white, size: 24),
+                padding: const EdgeInsets.all(AppSpacing.xs),
                 constraints: const BoxConstraints(),
               ),
             ],

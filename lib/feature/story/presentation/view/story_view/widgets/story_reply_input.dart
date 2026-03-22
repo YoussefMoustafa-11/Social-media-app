@@ -1,3 +1,5 @@
+import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_spacing.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +30,8 @@ class _StoryReplyInputState extends State<StoryReplyInput> {
       height: 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-        color: Colors.black.withOpacity(0.2),
+        border: Border.all(color: AppColors.overlayLight(0.2), width: 1),
+        color: AppColors.overlayDark(0.2),
       ),
       child: Row(
         children: [
@@ -41,18 +43,18 @@ class _StoryReplyInputState extends State<StoryReplyInput> {
               onSubmitted: widget.onSubmitted,
               textInputAction: TextInputAction.send,
               style: AppTextStyle.inputText.copyWith(
-                color: Colors.white,
+                color: AppColors.white,
                 fontSize: 14,
               ),
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 hintStyle: AppTextStyle.inputHint.copyWith(
-                  color: Colors.white.withOpacity(0.6),
+                  color: AppColors.overlayLight(0.6),
                   fontSize: 14,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
+                  horizontal: AppSpacing.xl,
+                  vertical: AppSpacing.sm,
                 ),
                 border: InputBorder.none,
               ),
@@ -60,15 +62,15 @@ class _StoryReplyInputState extends State<StoryReplyInput> {
           ),
           // Emoji Button
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: AppSpacing.xs),
             child: IconButton(
               onPressed: widget.onEmojiPressed,
               icon: const Icon(
                 Icons.sentiment_satisfied_alt,
-                color: Colors.white,
+                color: AppColors.white,
                 size: 20,
               ),
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(AppSpacing.xs),
               constraints: const BoxConstraints(),
             ),
           ),

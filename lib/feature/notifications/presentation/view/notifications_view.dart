@@ -2,7 +2,9 @@ import 'package:ahmed_task/Core/widgets/custom_bottom_navigation_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/Core/widgets/custom_button.dart';
+import 'package:ahmed_task/feature/notifications/presentation/view/widgets/notification_avatar.dart';
 
 class NotificationsView extends StatelessWidget {
   const NotificationsView({super.key});
@@ -12,8 +14,8 @@ class NotificationsView extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        bottomNavigationBar:    const CustomBottomNavigationBar(),
-        backgroundColor: Colors.grey[100],
+        bottomNavigationBar: const CustomBottomNavigationBar(),
+        backgroundColor: AppColors.borderColor.withValues(alpha: 0.3),
         appBar: _buildAppBar(),
         body: TabBarView(
           dragStartBehavior: DragStartBehavior.down,
@@ -26,7 +28,7 @@ class NotificationsView extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       elevation: 0,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new, size: 20),
@@ -34,10 +36,9 @@ class NotificationsView extends StatelessWidget {
         color: AppColors.darkText,
       ),
       centerTitle: true,
-      title: const Text(
+      title: Text(
         'Notifications',
-        style: TextStyle(
-          fontSize: 18,
+        style: AppTextStyle.heading2.copyWith(
           fontWeight: FontWeight.bold,
           color: AppColors.darkText,
         ),
@@ -148,7 +149,7 @@ class NotificationSectionHeader extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
       child: Text(
         title.toUpperCase(),
-        style: const TextStyle(
+        style: AppTextStyle.labelMedium.copyWith(
           fontSize: 11,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.5,
@@ -181,89 +182,90 @@ class UnreadNotificationItem extends StatelessWidget {
       color: AppColors.primary.withOpacity(0.05),
       padding: const EdgeInsets.all(16),
       child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // User Avatar with online indicator
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 24,
-                  backgroundImage: NetworkImage(userAvatar),
-                  backgroundColor: Colors.grey[300],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // User Avatar with online indicator
+          Stack(
+            children: [
+              NotificationAvatar(imageUrl: userAvatar),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  width: 14,
+                  height: 14,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.white, width: 2),
+                  ),
                 ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: Container(
-                    width: 14,
-                    height: 14,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 2),
+              ),
+            ],
+          ),
+          const SizedBox(width: 12),
+          // Notification content
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: AppTextStyle.labelMedium.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.darkText,
                     ),
+                    children: [
+                      TextSpan(
+                        text: userName,
+                        style: AppTextStyle.labelMedium.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.darkText,
+                        ),
+                      ),
+                      TextSpan(text: ' $notificationText'),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  timeAgo,
+                  style: AppTextStyle.bodyMedium.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.primary,
                   ),
                 ),
               ],
             ),
+          ),
+          // Post image
+          if (postImage != null) ...[
             const SizedBox(width: 12),
-            // Notification content
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.darkText,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: userName,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        TextSpan(text: ' $notificationText'),
-                      ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                postImage!,
+                width: 48,
+                height: 48,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: AppColors.borderColor,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    timeAgo,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
-            // Post image
-            if (postImage != null) ...[
-              const SizedBox(width: 12),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  postImage!,
-                  width: 48,
-                  height: 48,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
           ],
-        ),
+        ],
+      ),
     );
   }
 }
@@ -289,74 +291,75 @@ class NotificationItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         border: Border(
           bottom: BorderSide(color: AppColors.borderColor, width: 0.5),
         ),
       ),
       child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              radius: 24,
-              backgroundImage: NetworkImage(userAvatar),
-              backgroundColor: Colors.grey[300],
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.darkText,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: userName,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          NotificationAvatar(imageUrl: userAvatar),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: AppTextStyle.labelMedium.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.darkText,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: userName,
+                        style: AppTextStyle.labelMedium.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.darkText,
                         ),
-                        TextSpan(text: ' $notificationText'),
-                      ],
-                    ),
+                      ),
+                      TextSpan(text: ' $notificationText'),
+                    ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    timeAgo,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.greyText,
-                    ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  timeAgo,
+                  style: AppTextStyle.bodyMedium.copyWith(
+                    fontSize: 12,
+                    color: AppColors.greyText,
                   ),
-                ],
+                ),
+              ],
+            ),
+          ),
+          if (postImage != null) ...[
+            const SizedBox(width: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                postImage!,
+                width: 48,
+                height: 48,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: AppColors.borderColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  );
+                },
               ),
             ),
-            if (postImage != null) ...[
-              const SizedBox(width: 12),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  postImage!,
-                  width: 48,
-                  height: 48,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
           ],
-        ),
+        ],
+      ),
     );
   }
 }
@@ -380,66 +383,68 @@ class NotificationItemWithButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         border: Border(
           bottom: BorderSide(color: AppColors.borderColor, width: 0.5),
         ),
       ),
       child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              radius: 24,
-              backgroundImage: NetworkImage(userAvatar),
-              backgroundColor: Colors.grey[300],
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.darkText,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: userName,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          NotificationAvatar(imageUrl: userAvatar),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: AppTextStyle.labelMedium.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.darkText,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: userName,
+                        style: AppTextStyle.labelMedium.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.darkText,
                         ),
-                        TextSpan(text: ' $notificationText'),
-                      ],
-                    ),
+                      ),
+                      TextSpan(text: ' $notificationText'),
+                    ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    timeAgo,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.greyText,
-                    ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  timeAgo,
+                  style: AppTextStyle.bodyMedium.copyWith(
+                    fontSize: 12,
+                    color: AppColors.greyText,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const SizedBox(width: 12),
-            CustomButton(
-              onPressed: () {},
-              buttonText: 'Follow Back',
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              borderRadius: 20,
-              height: 32,
-              width: 100,
-              textStyle: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          const SizedBox(width: 12),
+          CustomButton(
+            onPressed: () {},
+            buttonText: 'Follow Back',
+            backgroundColor: AppColors.primary,
+            foregroundColor: AppColors.white,
+            borderRadius: 20,
+            height: 32,
+            width: 100,
+            textStyle: AppTextStyle.labelMedium.copyWith(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: AppColors.white,
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -465,93 +470,92 @@ class MultipleAvatarsNotificationItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         border: Border(
           bottom: BorderSide(color: AppColors.borderColor, width: 0.5),
         ),
       ),
       child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Multiple avatars stack
-            SizedBox(
-              width: 56,
-              height: 40,
-              child: Stack(
-                children: [
-                  for (int i = 0; i < userAvatars.length; i++)
-                    Positioned(
-                      left: i * 16,
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundImage: NetworkImage(userAvatars[i]),
-                        backgroundColor: Colors.grey[300],
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            SizedBox(width: 48 + 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.darkText,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: users[0],
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        TextSpan(text: ' and ${users[1]} $notificationText'),
-                      ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Multiple avatars stack
+          SizedBox(
+            width: 56,
+            height: 40,
+            child: Stack(
+              children: [
+                for (int i = 0; i < userAvatars.length; i++)
+                  Positioned(
+                    left: i * 16,
+                    child: NotificationAvatar(
+                      imageUrl: userAvatars[i],
+                      radius: 20,
+                      borderWidth: 2,
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    timeAgo,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.greyText,
-                    ),
-                  ),
-                ],
-              ),
+              ],
             ),
-            if (postImage != null) ...[
-              const SizedBox(width: 12),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  postImage!,
-                  width: 48,
-                  height: 48,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(8),
+          ),
+          SizedBox(width: 48 + 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: AppTextStyle.labelMedium.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.darkText,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: users[0],
+                        style: AppTextStyle.labelMedium.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.darkText,
+                        ),
                       ),
-                    );
-                  },
+                      TextSpan(text: ' and ${users[1]} $notificationText'),
+                    ],
+                  ),
                 ),
+                const SizedBox(height: 4),
+                Text(
+                  timeAgo,
+                  style: AppTextStyle.bodyMedium.copyWith(
+                    fontSize: 12,
+                    color: AppColors.greyText,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (postImage != null) ...[
+            const SizedBox(width: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                postImage!,
+                width: 48,
+                height: 48,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: AppColors.borderColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  );
+                },
               ),
-            ],
+            ),
           ],
-        ),
+        ],
+      ),
     );
   }
 }
@@ -571,64 +575,66 @@ class SystemNotificationItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         border: Border(
           bottom: BorderSide(color: AppColors.borderColor, width: 0.5),
         ),
       ),
       child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.star_rounded,
-                color: AppColors.primary,
-                size: 24,
-              ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: AppColors.primary.withOpacity(0.1),
+              shape: BoxShape.circle,
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.darkText,
-                      ),
-                      children: [
-                        TextSpan(text: 'Your post is trending in '),
-                        TextSpan(
-                          text: '#Photography',
-                          style: const TextStyle(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
+            child: const Icon(
+              Icons.star_rounded,
+              color: AppColors.primary,
+              size: 24,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: AppTextStyle.labelMedium.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.darkText,
+                    ),
+                    children: [
+                      TextSpan(text: 'Your post is trending in '),
+                      TextSpan(
+                        text: '#Photography',
+                        style: AppTextStyle.labelMedium.copyWith(
+                          fontSize: 14,
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold,
                         ),
-                        TextSpan(text: '. Check out the insights!'),
-                      ],
-                    ),
+                      ),
+                      TextSpan(text: '. Check out the insights!'),
+                    ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    timeAgo,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.greyText,
-                    ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  timeAgo,
+                  style: AppTextStyle.bodyMedium.copyWith(
+                    fontSize: 12,
+                    color: AppColors.greyText,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 }

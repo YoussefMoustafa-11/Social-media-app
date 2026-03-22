@@ -1,4 +1,6 @@
 import 'package:ahmed_task/Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_spacing.dart';
+import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/feature/share_bottom_sheet/presentation/view/widgets/recent_contact_item.dart';
 import 'package:ahmed_task/feature/share_bottom_sheet/presentation/view/widgets/share_option_item.dart';
 import 'package:ahmed_task/feature/share_bottom_sheet/presentation/view/widgets/suggested_user_item.dart';
@@ -11,7 +13,7 @@ class ShareBottomSheet extends StatelessWidget {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.overlayDark(0),
       builder: (_) => const ShareBottomSheet(),
     );
   }
@@ -25,7 +27,7 @@ class ShareBottomSheet extends StatelessWidget {
       builder: (context, scrollController) {
         return Container(
           decoration: const BoxDecoration(
-            color: Color(0xFFF6F7F8),
+            color: AppColors.scaffoldBackgroundAlt,
             borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
           ),
           child: Column(
@@ -34,19 +36,19 @@ class ShareBottomSheet extends StatelessWidget {
               Expanded(
                 child: ListView(
                   controller: scrollController,
-                  padding: const EdgeInsets.only(bottom: 32),
+                  padding: const EdgeInsets.only(bottom: AppSpacing.xxl),
                   children: [
                     _buildSearchBar(),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AppSpacing.md),
                     _buildRecentContacts(),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: AppSpacing.xl),
                     _buildShareGrid(),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: AppSpacing.xxl),
                     _buildSuggestedUsers(),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSpacing.xs),
             ],
           ),
         );
@@ -60,7 +62,7 @@ class ShareBottomSheet extends StatelessWidget {
       child: Center(
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Color(0xFFCBD5E1),
+            color: AppColors.placeholderColor,
             borderRadius: BorderRadius.all(Radius.circular(100)),
           ),
           child: SizedBox(width: 48, height: 6),
@@ -71,15 +73,21 @@ class ShareBottomSheet extends StatelessWidget {
 
   Widget _buildSearchBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.xs,
+      ),
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Search friends...',
-          hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF94A3B8)),
-          prefixIcon: const Icon(Icons.search, color: Color(0xFF94A3B8)),
+          hintStyle: AppTextStyle.inputHint.copyWith(
+            fontSize: 14,
+            color: AppColors.greyText,
+          ),
+          prefixIcon: const Icon(Icons.search, color: AppColors.greyText),
           filled: true,
-          fillColor: const Color(0xFFF1F5F9),
-          contentPadding: const EdgeInsets.symmetric(vertical: 12),
+          fillColor: AppColors.surfaceMuted,
+          contentPadding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
@@ -93,7 +101,10 @@ class ShareBottomSheet extends StatelessWidget {
             borderSide: const BorderSide(color: AppColors.primary, width: 2),
           ),
         ),
-        style: const TextStyle(fontSize: 14, color: Color(0xFF1E293B)),
+        style: AppTextStyle.inputText.copyWith(
+          fontSize: 14,
+          color: AppColors.darkText,
+        ),
       ),
     );
   }
@@ -102,50 +113,50 @@ class ShareBottomSheet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           child: Text(
             'Recent Contacts',
-            style: TextStyle(
+            style: AppTextStyle.bodyMedium.copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1E293B),
+              color: AppColors.darkText,
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: AppSpacing.sm),
         SizedBox(
           height: 96,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             children: const [
               RecentContactItem(name: 'New', icon: Icons.add),
-              SizedBox(width: 20),
+              SizedBox(width: AppSpacing.md),
               RecentContactItem(
                 name: 'Alex',
                 imageUrl:
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuD0mBm2I2QCZ0ur-Og8q2du_IJqhFKWzj3wertZst7hyr-KK59KwLOnf4H0MNPQD_ZW8YBawnuKwnn73OlhTNFPGK-OsuynhJgfBV8ooUthophhWlW-cTWQfjHJoYpu-UMn8XKfupoH_9WFmZaH-WtZUxpD2dNn8qpvfgpputgI3bIYfK6uHdn467kAZvdy9yxiYq3QXHk5VG7B4nWIwB0BzuSI7Dkv3U80e3TAlNPSyVH1EcK6o7UxOdR8P28z5ImKdpUsMnf1swg',
               ),
-              SizedBox(width: 20),
+              SizedBox(width: AppSpacing.md),
               RecentContactItem(
                 name: 'Jordan',
                 imageUrl:
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuDzPXKf96W8h20PqJA33id-AqbADfv84vf385TVrQVh7t7hytrVTCVwJ7wU1IlB25oCRBYd-KrOd0UUTRUEMJBIt361gfQ6NFeItoJA3Ufs7U7eNl2ouAULThzV5V9O0lirYn7OlVCVDINXU0jWhRaTQl8iMZbFQBJ2IC57XcypdCBeXFLf61ER-YkdWHGn7cCrVJLr6d0-9OO8zFRZvjqQdoMBHKOTcwIZorKIOhKLbuvQeY-pRwdQ83Ie4bfhjs-puiDzEPj5JnY',
               ),
-              SizedBox(width: 20),
+              SizedBox(width: AppSpacing.md),
               RecentContactItem(
                 name: 'Taylor',
                 imageUrl:
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuCq-Qzal0mTM75fwXFggU3H7i4da2Q80uZIFrzqV6X9hcCQjSjKs5seC_ZMeKOKdi-Z87s2RqCJo7I5UwQIjj_Wwb1C0SFpsnerdE-PqrhzB2wPYS84_sdY9EuV-1RzWMFaqFWOrsaWK8dEce3tsKPK9ir4pXuS5nV7xMf0jcwsl5uFA3lmcd0mEOCY8uIKmjm08RaxGO791x_CukYi12lRlW5z7cvMrP5CpQIN8AjP2y7l23q3436jQUo6gwZkFu3xZTCS3lezITI',
               ),
-              SizedBox(width: 20),
+              SizedBox(width: AppSpacing.md),
               RecentContactItem(
                 name: 'Morgan',
                 imageUrl:
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuDNYgZJsRyRefdKgquadw1iyVJf72dYFy99DU-VFcXsopjnCSCVKQP6b7uOongnh_wEmLjnvqJIln9LWrhKymR314F3ufEWhEG1hogrnAQu-dg4YQWusaWMP8B5iIv2QYreGNDiMFoFBvvruVCJk9v1UfgIl9su9CxiIJIAxVzrSFq4uYqPi77kxRrJAcqsgha3kxHtGtUahlrbE-91CUXIezXVuiv_qBeRhip2NPk3PGwYc7n7BVp8tq8uMqqRUbppJFCYxfxcxTg',
               ),
-              SizedBox(width: 20),
+              SizedBox(width: AppSpacing.md),
               RecentContactItem(
                 name: 'Casey',
                 imageUrl:
@@ -165,20 +176,20 @@ class ShareBottomSheet extends StatelessWidget {
       _ShareOption(
         Icons.chat_bubble,
         'WhatsApp',
-        Color(0xFF25D366),
-        Color(0x1A25D366),
+        AppColors.whatsapp,
+        AppColors.whatsappTint,
       ),
       _ShareOption(
         Icons.send,
         'Messenger',
-        Color(0xFF0084FF),
-        Color(0x1A0084FF),
+        AppColors.messenger,
+        AppColors.messengerTint,
       ),
       _ShareOption(
         Icons.camera_alt,
         'Instagram',
-        Color(0xFFE1306C),
-        Color(0x1AE1306C),
+        AppColors.instagram,
+        AppColors.instagramTint,
       ),
       _ShareOption(Icons.more_horiz, 'More', null, null),
     ];
@@ -186,26 +197,26 @@ class ShareBottomSheet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           child: Text(
             'Share to',
-            style: TextStyle(
+            style: AppTextStyle.bodyMedium.copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1E293B),
+              color: AppColors.darkText,
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: AppSpacing.sm),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           child: GridView.count(
             crossAxisCount: 4,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
+            mainAxisSpacing: AppSpacing.md,
+            crossAxisSpacing: AppSpacing.md,
             childAspectRatio: 0.85,
             children: shareOptions
                 .map(
@@ -251,23 +262,23 @@ class ShareBottomSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Suggested Users',
-                style: TextStyle(
+                style: AppTextStyle.bodyMedium.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF1E293B),
+                  color: AppColors.darkText,
                 ),
               ),
               GestureDetector(
                 onTap: () {},
-                child: const Text(
+                child: Text(
                   'Invite',
-                  style: TextStyle(
+                  style: AppTextStyle.labelMedium.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: AppColors.primary,
@@ -277,9 +288,9 @@ class ShareBottomSheet extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSpacing.md),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
           child: Column(
             children: users
                 .map(
